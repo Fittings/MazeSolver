@@ -4,22 +4,18 @@ package mazesolver;
 
 
 public class MazeSolver {
-	static int counter; //ZZZ
 	
 	public static int[][] solveMaze(int[][] maze_array,int staX, int staY, int endX, int endY) {
-		counter = 0; //ZZZ
 		int[][] maze_sol = maze_array.clone();
 		maze_sol[staY][staX] = 2; //2 meaning Start.
-		if (trySolveMaze(maze_sol, staX, staY, endX, endY)) {
-			System.out.println("Counter: " + counter);
-			return maze_sol;
-		}
+		
+		if (trySolveMaze(maze_sol, staX, staY, endX, endY)) return maze_sol;
+
 		return maze_array; //No solution
 	}
 	
 	//Lets do this using backtracking~!
 	public static boolean trySolveMaze(int[][] maze_array,int currX, int currY, int endX, int endY) {
-		counter++; //ZZZ
 		if (currX == endX && currY == endY) {
 			maze_array[currY][currX] = 4; //4 meanign End.
 			return true; //We have reached the end
