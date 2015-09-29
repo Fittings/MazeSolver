@@ -11,6 +11,7 @@ public class MazeSolver {
 		int[][] maze_sol = maze_array.clone();
 		maze_sol[staY][staX] = 2; //2 meaning Start.
 		if (trySolveMaze(maze_sol, staX, staY, endX, endY)) {
+			System.out.println("Counter: " + counter);
 			return maze_sol;
 		}
 		return maze_array; //No solution
@@ -18,8 +19,11 @@ public class MazeSolver {
 	
 	//Lets do this using backtracking~!
 	public static boolean trySolveMaze(int[][] maze_array,int currX, int currY, int endX, int endY) {
-		System.out.println("Counter: " + counter++);
-		if (currX == endX && currY == endY) return true; //We have reached the end.
+		counter++; //ZZZ
+		if (currX == endX && currY == endY) {
+			maze_array[currY][currX] = 4; //4 meanign End.
+			return true; //We have reached the end
+		}
 		int tempX = currX, tempY = currY;
 		//Try North, try East, Try South, Try West
 		
@@ -28,6 +32,7 @@ public class MazeSolver {
 		if (tempY >= 0 && maze_array[tempY][tempX] == 0) {
 			maze_array[tempY][tempX] = 3; //3 Meaning X
 			if (trySolveMaze(maze_array, tempX, tempY, endX, endY)) return true; //Solved
+			maze_array[tempY][tempX] = 0; //Failed, return to previous state
 		}
 		
 		//East
@@ -35,6 +40,7 @@ public class MazeSolver {
 		if (tempX < maze_array[tempY].length && maze_array[tempY][tempX] == 0) {
 			maze_array[tempY][tempX] = 3; //3 Meaning X
 			if (trySolveMaze(maze_array, tempX, tempY, endX, endY)) return true; //Solved
+			maze_array[tempY][tempX] = 0; //Failed, return to previous state
 		}
 		
 		//South
@@ -42,6 +48,7 @@ public class MazeSolver {
 		if (tempY < maze_array.length && maze_array[tempY][tempX] == 0) {
 			maze_array[tempY][tempX] = 3;
 			if (trySolveMaze(maze_array, tempX, tempY, endX, endY)) return true; //Solved
+			maze_array[tempY][tempX] = 0; //Failed, return to previous state
 		}
 		
 		//West
@@ -49,6 +56,7 @@ public class MazeSolver {
 		if (tempX >= 0 && maze_array[tempY][tempX] == 0) {
 			maze_array[tempY][tempX] = 3;
 			if (trySolveMaze(maze_array, tempX, tempY, endX, endY)) return true; //Solved
+			maze_array[tempY][tempX] = 0; //Failed, return to previous state
 		}
 		
 		return false; //No movements for this iteration

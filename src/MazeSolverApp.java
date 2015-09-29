@@ -46,7 +46,7 @@ public class MazeSolverApp {
 	
 	private static String mazeToString(int[][] maze) {
 		StringBuilder myString = new StringBuilder();
-		for (int x=0; x < maze.length; x++) {
+		for (int x=0; x < maze[0].length; x++) {
 			for (int y=0; y < maze.length; y++) {
 				if (maze[y][x] == 2) {
 					myString.append("S");
@@ -54,6 +54,8 @@ public class MazeSolverApp {
 					 myString.append("X");
 				} else if (maze[y][x] == 1) {
 					myString.append("#");
+				} else if (maze[y][x] == 4) {
+					myString.append("E");
 				} else {
 					myString.append(" ");
 				}
